@@ -15,7 +15,7 @@ classdef Test_Chow_Sequencial
            obj.X=X;
         end
         
-        function Bool_test = Test_Chow(obj,inputArg)
+        function Bool_test = Test_Chow(obj)
             % Retorna el valor 1 si pasó el test de Chow, es decir
             % No se rechaza la nula de que no hubieron quiebres
             % estructurales en algún período
