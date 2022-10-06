@@ -38,8 +38,8 @@ classdef Test_Chow_Sequencial
             mat_sup=[x_prequiebre zeros_aux];
             mat_inf=[zeros_aux x_postquiebre];
             reg= [mat_sup;mat_inf];
-            st_h1= Y'*( eye(size(reg,1))-( reg/(reg'*reg)*reg' ))*Y;
-            st_h0=Y'*( eye(size(X,1))-( X/(X'*X)*X' ))*Y;
+            st_h1= Y'*( eye(size(reg,1))-( reg\(reg'*reg)*reg' ))*Y;
+            st_h0=Y'*( eye(size(X,1))-( X\(X'*X)*X' ))*Y;
             aux_est_chow=(st_h1-st_h0)/st_h1;
             est_chow= ((size(X,1)-2*size(X,2)) / size(X,2) )* aux_est_chow;
             valor_crit_f= finv(0.95,5,size(x,1)-2*size(x,2));

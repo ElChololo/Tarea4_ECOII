@@ -25,14 +25,14 @@ classdef TestHausmanAlternativo
             %Provienen de los residuos de una regresión de X en z
             y=obj.X;
             x=[ones(length(obj.Z),1) obj.Z];
-            coef_mco=(x'*x)/(x'*y);
+            coef_mco=(x'*x)\(x'*y);
             v_est=y-coef_mco*x;
             
         end
         function u_est = reg_yx(obj)
             y=obj.Y;
             x=[ones(length(obj.X,1)) obj.X];
-            coef_mco=(x'*x)/(x'*y);
+            coef_mco=(x'*x)\(x'*y);
             u_est = y-coef_mco*coef_mco;
         end
         
@@ -40,7 +40,7 @@ classdef TestHausmanAlternativo
             y=u_est;
             x=obj.X;
             x=[ones(length(v_est),1) x v_est];
-            coef_mco = (x'*x)/(x'*y);
+            coef_mco = (x'*x)\(x'*y);
             resid = y-coef_mco*x;
             resid_2 = resid'*resid;
             sigma_2= resid_2/(size(x,1)-size(x,2));
@@ -50,6 +50,7 @@ classdef TestHausmanAlternativo
             %Identificar las posiciones de los estimadores v_est
             posicion_v_est=size(x,2)-size(obj.X,2)-1;
             significancia_v_est=zeros(size(v_est,2),1);
+            %% CREO QUE NO ESTÁ AGARRANDO BIEN LOS COEF MCO RELEVANTES
             for ii=1:posicion_v_est
                 est_t= (coef_mco(ii))/(var_betas(ii,ii))^(1/2);
                 if abs(est_t)>1.96
